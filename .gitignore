@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# SQLite database
+*.sqlite3
+*.db
+*.db-journal
+warehouse.db
+test_warehouse.db
+
+# Env files
+.env
+
+# Uvicorn log files
+*.log
+
+# Pytest cache
+.pytest_cache/
+.cache/
+
+# VSCode
+.vscode/
+.vscode/settings.json
+.idea
+
+# MacOS
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyd
+*.pyo
+
+# Test Reports
+htmlcov/
+.coverage
+*.cover
+coverage.xml
+.cache
+*.coveragerc
+
+# MyPy
+.mypy_cache/
+dmypy.json
+dmypy.json.#
+
+# Git files
+.git
+
+# FastAPI Static files (if used in production)
+staticfiles/

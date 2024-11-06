@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: warehouse
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    profiles:
+      - web
+
+  db_test:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_warehouse
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    profiles:
+      - test
+
+  web:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      - db
+    env_file:
+      - .env
+    profiles:
+      - web
+
+  test:
+    build: .
+    command: pytest
+    volumes:
+      - .:/code
+    environment:
+      DATABASE_URL: ${DATABASE_URL_TEST}
+    depends_on:
+      - db_test
+    env_file:
+      - .env
+    profiles:
+      - test
+
+volumes:
+  postgres_data:
+  postgres_data_test:
