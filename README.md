@@ -36,7 +36,7 @@ To start the application, initialize all services using Docker Compose:
 
 1. **Start Services**
     ```bash
-    docker-compose up --profile web --build
+    docker-compose --profile web up --build
     ```
    - The service will be accessible at `http://localhost:8000/`.
 
